@@ -17,6 +17,16 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  #Firebase
+  firebase_core: ^0.4.0+9
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+5
+
+  #Bloc
+  bloc: ^3.0.0
+  flutter_bloc: ^3.1.0
+
+
   flutter:
     sdk: flutter
 
