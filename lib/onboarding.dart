@@ -1,55 +1,56 @@
-import 'package:aghaz/app_theme.dart';
-import 'package:aghaz/navigation_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
-void main() => runApp(MyApp());
+/// This is the main method of app, from here execution starts.
+void main() => runApp(App());
 
-class MyApp extends StatelessWidget {
+/// App widget class
+
+class App extends StatelessWidget {
   //making list of pages needed to pass in IntroViewsFlutter constructor.
   final pages = [
     PageViewModel(
         pageColor: const Color(0xFF03A9F4),
         // iconImageAssetPath: 'assets/air-hostess.png',
-        bubble: Image.asset('assets/images/claims.png'),
+        bubble: Image.asset('assets/air-hostess.png'),
         body: Text(
-          'Take picture of the problems you encounter in your city(garbage piled up , degraded roads, severage) and share them on  Aghaz social network',
+          'Haselfree  booking  of  flight  tickets  with  full  refund  on  cancelation',
         ),
         title: Text(
-          'Share Your Claims',
+          'Flights',
         ),
         titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
         bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
         mainImage: Image.asset(
-          'assets/images/claims.png',
-          height: 185.0,
-          width: 185.0,
+          'assets/airplane.png',
+          height: 285.0,
+          width: 285.0,
           alignment: Alignment.center,
         )),
     PageViewModel(
-      pageColor: AppTheme.buildLightTheme().primaryColor,
-      iconImageAssetPath: 'assets/images/rewards.png',
+      pageColor: const Color(0xFF8BC34A),
+      iconImageAssetPath: 'assets/waiter.png',
       body: Text(
-        'Authentic and verified claims earn you points redeemble for gifts',
+        'We  work  for  the  comfort ,  enjoy  your  stay  at  our  beautiful  hotels',
       ),
-      title: Text('Get Rewards'),
+      title: Text('Hotels'),
       mainImage: Image.asset(
-        'assets/images/rewards.png',
+        'assets/hotel.png',
         height: 285.0,
         width: 285.0,
         alignment: Alignment.center,
       ),
-      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.black),
+      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
       bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
     ),
     PageViewModel(
       pageColor: const Color(0xFF607D8B),
-      iconImageAssetPath: 'assets/img3.jpg',
+      iconImageAssetPath: 'assets/taxi-driver.png',
       body: Text(
-        'Earn Money and participate in Government Project',
+        'Easy  cab  booking  at  your  doorstep  with  cashless  payment  system',
       ),
-      title: Text('Paricipate In Projects'),
+      title: Text('Cabs'),
       mainImage: Image.asset(
         'assets/taxi.png',
         height: 285.0,
@@ -61,15 +62,14 @@ class MyApp extends StatelessWidget {
     ),
   ];
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aghaz',
       debugShowCheckedModeBanner: false,
+      title: 'IntroViews Flutter', //title of app
       theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+        primarySwatch: Colors.blue,
+      ), //ThemeData
       home: Builder(
         builder: (context) => IntroViewsFlutter(
           pages,
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NavigationHomeScreen(),
+                builder: (context) => HomePage(),
               ), //MaterialPageRoute
             );
           },
@@ -88,7 +88,23 @@ class MyApp extends StatelessWidget {
             fontSize: 18.0,
           ),
         ), //IntroViewsFlutter
-      ),
-    );
+      ), //Builder
+    ); //Material App
+  }
+}
+
+/// Home Page of our example app.
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ), //Appbar
+      body: Center(
+        child: Text("This is the home page of the app"),
+      ), //Center
+    ); //Scaffold
   }
 }
