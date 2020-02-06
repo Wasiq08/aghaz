@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
         title: Text(
           'Share Your Claims',
         ),
-        titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
-        bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
+        titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white , fontSize: 50.0),
+        bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white, fontSize: 15.0),
         mainImage: Image.asset(
           'assets/images/claims.png',
-          height: 185.0,
-          width: 185.0,
+          height: 285.0,
+          width: 285.0,
           alignment: Alignment.center,
         )),
     PageViewModel(
@@ -33,31 +33,31 @@ class MyApp extends StatelessWidget {
       body: Text(
         'Authentic and verified claims earn you points redeemble for gifts',
       ),
-      title: Text('Get Rewards'),
+      title: Text('Get Your Rewards'),
       mainImage: Image.asset(
         'assets/images/rewards.png',
         height: 285.0,
         width: 285.0,
         alignment: Alignment.center,
       ),
-      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.black),
-      bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
+      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white, fontSize: 50.0),
+      bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white, fontSize: 15.0),
     ),
     PageViewModel(
       pageColor: const Color(0xFF607D8B),
-      iconImageAssetPath: 'assets/img3.jpg',
+      iconImageAssetPath: 'assets/images/project.png',
       body: Text(
-        'Earn Money and participate in Government Project',
+        'Earn Money and Participate in Community or Organization Project',
       ),
-      title: Text('Paricipate In Projects'),
+      title: Text('Engage In Community'),
       mainImage: Image.asset(
-        'assets/taxi.png',
+        'assets/images/project.png',
         height: 285.0,
         width: 285.0,
         alignment: Alignment.center,
       ),
-      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
-      bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
+      titleTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white, fontSize: 50.0),
+      bodyTextStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white, fontSize: 15.0),
     ),
   ];
 

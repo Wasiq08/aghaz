@@ -3,6 +3,8 @@ import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/AghazCard.dart';
+
 class Choice {
   const Choice({this.title});
   final String title;
@@ -38,7 +40,7 @@ Widget _buildProjectListView() {
 
 Widget _buildExploreListView() {
   return Container(
-    child: Text('Explore'),
+    child: AghazCard(title: 'Wasiq',color: Colors.red,detail: 'adadad',imageUrl: 'assets/images/img1.jpeg',name: 'Wasiq', date: '12/09/2019',additionalDetail: 'asdada',),
   );
 }
 
