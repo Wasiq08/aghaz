@@ -7,6 +7,7 @@ import 'widgets/AghazCard.dart';
 
 class Choice {
   const Choice({this.title});
+
   final String title;
 }
 
@@ -20,16 +21,16 @@ const List<Choice> choices = const <Choice>[
 
 Widget _buildListView() {
   return Container(
-    color: AppTheme.buildLightTheme().backgroundColor,
+      color: AppTheme.buildLightTheme().backgroundColor,
       child: ListView.builder(
-    itemCount: postList.length,
-    padding: const EdgeInsets.only(top: 10),
-    itemBuilder: (BuildContext context, int index) {
-      return PostListView(
-        postData: postList[index],
-      );
-    },
-  ));
+        itemCount: postList.length,
+        padding: const EdgeInsets.only(top: 10),
+        itemBuilder: (BuildContext context, int index) {
+          return PostListView(
+            postData: postList[index],
+          );
+        },
+      ));
 }
 
 Widget _buildProjectListView() {
@@ -40,37 +41,35 @@ Widget _buildProjectListView() {
 
 Widget _buildExploreListView() {
   return Container(
-    child: AghazCard(title: 'Wasiq',color: Colors.red,detail: 'adadad',imageUrl: 'assets/images/img1.jpeg',name: 'Wasiq', date: '12/09/2019',additionalDetail: 'asdada',),
+    child: AghazCard(
+      title: 'Wasiq',
+      color: Colors.red,
+      detail: 'adadad',
+      imageUrl: 'assets/images/img1.jpeg',
+      name: 'Wasiq',
+      date: '12/09/2019',
+      additionalDetail: 'asdada',
+    ),
   );
 }
 
-
-
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
-  
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
-    
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-    return MaterialApp(
-      home: DefaultTabController(
+    return  DefaultTabController(
         length: choices.length,
         child: Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Aghaz')),
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: Text('Aghaz'),
             bottom: TabBar(
               isScrollable: true,
               tabs: choices.map((Choice choice) {
@@ -88,8 +87,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
-    );
+      );
+
   }
 }
-

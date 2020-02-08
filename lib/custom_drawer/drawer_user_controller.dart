@@ -193,7 +193,9 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                                           icon: widget.animatedIconData != null
                                               ? widget.animatedIconData
                                               : AnimatedIcons.arrow_menu,
-                                          progress: iconAnimationController),
+                                          progress: iconAnimationController,
+                                          color: Colors.white,
+                                        ),
                                 ),
                                 onTap: () {
                                   FocusScope.of(context)

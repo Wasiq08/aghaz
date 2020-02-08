@@ -32,6 +32,9 @@ dependencies:
   #BubbleTab
   bubble_tab_indicator: "^0.1.4"
 
+  #Google Fonts
+  google_fonts: ^0.3.7
+
   flutter:
     sdk: flutter
 
