@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AppTheme {
-
+abstract class AppTheme {
   static const Color notWhite = Color(0xFFEDF0F2);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF);
@@ -18,6 +18,76 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
 
+  static ThemeData aghazTheme() {
+    ThemeData data = ThemeData(
+      appBarTheme: AppBarTheme(
+          color: Color(0xff16a085),
+          iconTheme: IconThemeData(color: Colors.white, size: 24)),
+      primaryColor: Color(0xff16a085),
+      primaryColorDark: Color(0xff16a085),
+      accentColor: Color(0xff16a085),
+      scaffoldBackgroundColor: notWhite,
+      textTheme: TextTheme(
+        title: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        subtitle: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+        ),
+        subhead: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        caption: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 11,
+          fontWeight: FontWeight.w400,
+        ),
+        headline: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+        display1: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 30,
+          fontWeight: FontWeight.w200,
+        ),
+        display2: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 35,
+          fontWeight: FontWeight.w200,
+        ),
+        display3: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 40,
+          fontWeight: FontWeight.w200,
+        ),
+        display4: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 45,
+          fontWeight: FontWeight.w200,
+        ),
+        body1: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+        ),
+        body2: GoogleFonts.sourceSansPro(
+          color: darkerText,
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+
+    return data;
+  }
 
   static TextTheme _buildTextTheme(TextTheme base) {
     const String fontName = 'WorkSans';
@@ -70,8 +140,6 @@ class AppTheme {
   }
 }
 
-
-
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 
@@ -83,5 +151,3 @@ class HexColor extends Color {
     return int.parse(hexColor, radix: 16);
   }
 }
-
-

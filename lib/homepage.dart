@@ -1,9 +1,9 @@
 import 'package:aghaz/app_theme.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
+import 'package:aghaz/widgets/AghazCard.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/AghazCard.dart';
 
 class Choice {
   const Choice({this.title});
@@ -44,18 +44,12 @@ Widget _buildExploreListView() {
   );
 }
 
-
-
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
-  
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     
@@ -92,4 +86,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
