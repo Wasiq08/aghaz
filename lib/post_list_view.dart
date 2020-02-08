@@ -1,7 +1,5 @@
-import 'package:aghaz/app_theme.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
 import 'package:aghaz/model/post_list.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 class PostListView extends StatelessWidget {

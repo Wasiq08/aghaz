@@ -1,6 +1,8 @@
-import 'package:aghaz/app_theme.dart';
+import 'package:aghaz/custom_drawer/navigation_home_screen.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
-import 'package:aghaz/navigation_home_screen.dart';
+import 'package:aghaz/screens/HomeLogin.dart';
+
+import 'package:aghaz/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
@@ -27,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NavigationHomeScreen(),
+              builder: (context) => HomeLogin(),
             ), //MaterialPageRoute
           );
         },
@@ -35,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NavigationHomeScreen(),
+              builder: (context) => HomeLogin(),
             ), //MaterialPageRoute
           );
         },
