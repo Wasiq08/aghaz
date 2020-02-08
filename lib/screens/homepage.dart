@@ -1,9 +1,12 @@
+
+import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
 import 'package:aghaz/themes/app_theme.dart';
 import 'package:aghaz/widgets/AghazCard.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Choice {
   const Choice({this.title});
@@ -61,33 +64,40 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
-
-    return  DefaultTabController(
-        length: choices.length,
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            title: Text('Aghaz'),
-            bottom: TabBar(
-              isScrollable: true,
-              tabs: choices.map((Choice choice) {
-                return Tab(
-                  text: choice.title,
+    return DefaultTabController(
+      length: choices.length,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(EvaIcons.logOut),
+              onPressed: () {
+                BlocProvider.of<AuthenticationBloc>(context).add(
+                  LoggedOut(),
                 );
-              }).toList(),
+              },
             ),
-          ),
-          body: TabBarView(
-            children: <Widget>[
-              _buildListView(),
-              _buildProjectListView(),
-              _buildExploreListView()
-            ],
+          ],
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text('Aghaz'),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: choices.map((Choice choice) {
+              return Tab(
+                text: choice.title,
+              );
+            }).toList(),
           ),
         ),
-      );
-
+        body: TabBarView(
+          children: <Widget>[
+            _buildListView(),
+            _buildProjectListView(),
+            _buildExploreListView()
+          ],
+        ),
+      ),
+    );
   }
 }

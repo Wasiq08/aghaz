@@ -1,6 +1,8 @@
 import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
 import 'package:aghaz/bloc/login/bloc.dart';
+import 'package:aghaz/custom_drawer/navigation_home_screen.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
+import 'package:aghaz/screens/SignUpPage.dart';
 import 'package:aghaz/services/UserRepository.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -33,34 +35,24 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (context, state) {
-      if (state is Uninitialized) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      } else if (state is Authenticated) {
-        return LoadingState();
-      } else if (state is Unauthenticated) {
-        return BlocProvider<LoginBloc>(
-          create: (context) => LoginBloc(userRepository: _userRepository),
-          child: UserLogin(userRepository: _userRepository),
-        );
-      } else {
-        return Center(
-          child: Text("afasfas"),
-        );
-      }
-    });
-  }
-}
-
-class LoadingState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Un initialized"),
-      ),
+      builder: (context, state) {
+        if (state is Uninitialized) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is Authenticated) {
+          return NavigationHomeScreen();
+        } else if (state is Unauthenticated) {
+          return BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(userRepository: _userRepository),
+            child: UserLogin(userRepository: _userRepository),
+          );
+        } else {
+          return Center(
+            child: Text("afasfas"),
+          );
+        }
+      },
     );
   }
 }
@@ -108,7 +100,7 @@ class _UserLoginState extends State<UserLogin> {
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state.isFailure) {
-              Navigator.pop(context);
+              //Navigator.pop(context);
               showBottomSheet(
                 context: context,
                 builder: (context) => Container(
@@ -131,7 +123,7 @@ class _UserLoginState extends State<UserLogin> {
                 ),
               );
             } else if (state.isSubmitting) {
-              Navigator.pop(context);
+              //Navigator.pop(context);
               showBottomSheet(
                 context: context,
                 builder: (context) => Container(
@@ -252,7 +244,16 @@ class _UserLoginState extends State<UserLogin> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterScreen(
+                                  userRepository: _userRepository,
+                                ),
+                              ),
+                            );
+                          },
                           child: Text(
                             "Donot have an account",
                             style: Theme.of(context)
