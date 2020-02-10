@@ -1,6 +1,8 @@
 import 'package:aghaz/app_theme.dart';
+import 'package:aghaz/explore.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
+import 'package:aghaz/screens/ProjectPage.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/AghazCard.dart';
@@ -34,13 +36,13 @@ Widget _buildListView() {
 
 Widget _buildProjectListView() {
   return Container(
-    child: Text('Project'),
+    child: ProjectCard()
   );
 }
 
 Widget _buildExploreListView() {
   return Container(
-    child: AghazCard(title: 'Wasiq',color: Colors.red,detail: 'adadad',imageUrl: 'assets/images/img1.jpeg',name: 'Wasiq', date: '12/09/2019',additionalDetail: 'asdada',),
+    child: ExplorePage()
   );
 }
 
