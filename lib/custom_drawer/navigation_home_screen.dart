@@ -1,10 +1,11 @@
-import 'package:aghaz/app_theme.dart';
 import 'package:aghaz/custom_drawer/drawer_user_controller.dart';
 import 'package:aghaz/custom_drawer/home_drawer.dart';
-import 'package:aghaz/feedback_screen.dart';
-import 'package:aghaz/help_screen.dart';
-import 'package:aghaz/homepage.dart';
-import 'package:aghaz/invite_friend_screen.dart';
+
+import 'package:aghaz/screens/feedback_screen.dart';
+import 'package:aghaz/screens/help_screen.dart';
+import 'package:aghaz/screens/homepage.dart';
+import 'package:aghaz/screens/invite_friend_screen.dart';
+import 'package:aghaz/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class NavigationHomeScreen extends StatefulWidget {
@@ -32,7 +33,6 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         top: false,
         bottom: false,
         child: Scaffold(
-          backgroundColor: AppTheme.nearlyWhite,
           body: DrawerUserController(
             screenIndex: drawerIndex,
             drawerWidth: MediaQuery.of(context).size.width * 0.75,

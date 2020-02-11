@@ -1,5 +1,6 @@
-import 'package:aghaz/app_theme.dart';
+
 import 'package:aghaz/custom_drawer/home_drawer.dart';
+import 'package:aghaz/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class DrawerUserController extends StatefulWidget {
@@ -193,7 +194,9 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                                           icon: widget.animatedIconData != null
                                               ? widget.animatedIconData
                                               : AnimatedIcons.arrow_menu,
-                                          progress: iconAnimationController),
+                                          progress: iconAnimationController,
+                                          color: Colors.white,
+                                        ),
                                 ),
                                 onTap: () {
                                   FocusScope.of(context)

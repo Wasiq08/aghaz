@@ -61,7 +61,7 @@ class AghazCard extends StatelessWidget {
                       child: Center(
                         child: Icon(Icons.image),
                       ),
-                      color: Colors.black38,
+                      color: Colors.grey[100],
                       width: ScreenSize.blockSizeHorizontal * 100,
                       height: ScreenSize.blockSizeVertical * 25),
                   Container(
@@ -74,7 +74,7 @@ class AghazCard extends StatelessWidget {
                         ],
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.black45,
+                        color: Colors.grey[200],
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(10),
                             bottomLeft: Radius.circular(10)),
