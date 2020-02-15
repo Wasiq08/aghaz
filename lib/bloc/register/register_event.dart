@@ -1,3 +1,4 @@
+import 'package:aghaz/model/user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -48,4 +49,21 @@ class Submitted extends RegisterEvent {
   String toString() {
     return 'Submitted { email: $email, password: $password }';
   }
+}
+
+class SendData extends RegisterEvent {
+  final String name;
+  final String email;
+  final String password;
+  final String address;
+  final String gender;
+  final String dob;
+
+  SendData(
+      {this.name,
+      this.email,
+      this.password,
+      this.address,
+      this.gender,
+      this.dob});
 }

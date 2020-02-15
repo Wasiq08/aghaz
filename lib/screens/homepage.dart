@@ -1,7 +1,7 @@
-
 import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
+import 'package:aghaz/screens/VolunteerPost.dart';
 import 'package:aghaz/themes/app_theme.dart';
 import 'package:aghaz/widgets/AghazCard.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -67,6 +67,18 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: choices.length,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VolunteerPost(),
+              ),
+            );
+          },
+          label: Text("Post"),
+          icon: Icon(EvaIcons.paperPlaneOutline),
+        ),
         appBar: AppBar(
           actions: <Widget>[
             IconButton(

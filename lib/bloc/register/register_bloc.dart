@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:aghaz/bloc/register/register_state.dart';
 import 'package:aghaz/services/UserRepository.dart';
+import 'package:aghaz/services/firebase_store/FirebaseStore.dart';
 import 'package:aghaz/validator/Validator.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -9,9 +10,12 @@ import './bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
+  final FirebaseStore _store;
 
-  RegisterBloc({@required UserRepository userRepository})
+  RegisterBloc(
+      {@required UserRepository userRepository, @required FirebaseStore store})
       : assert(userRepository != null),
+        _store = store,
         _userRepository = userRepository;
 
   @override
@@ -36,6 +40,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
+    if (event is SendData) {
+      String uid = await _userRepository.getCompleteUser();
+      _store.sendData(
+          uid: uid,
+          name: event.name,
+          email: event.email,
+          password: event.password,
+          gender: event.gender,
+          address: event.address,
+          dob: event.dob);
+    }
     if (event is EmailChanged) {
       yield* _mapEmailChangedToState(event.email);
     } else if (event is PasswordChanged) {

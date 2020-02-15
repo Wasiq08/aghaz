@@ -35,7 +35,8 @@ class VolunteerDetail extends StatelessWidget {
                   duration: Duration(seconds: 1),
                 );
               },
-              color: Theme.of(context).accentColor)
+              color: Theme.of(context).accentColor),
+         
         ],
       ),
     );

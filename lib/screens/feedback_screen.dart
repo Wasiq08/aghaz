@@ -19,6 +19,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       child: SafeArea(
         top: false,
         child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('FeedBack'),
+            centerTitle: true,
+          ),
           backgroundColor: AppTheme.nearlyWhite,
           body: SingleChildScrollView(
             child: SizedBox(
