@@ -1,7 +1,6 @@
 import 'package:aghaz/helper/ScreenSize.dart';
-import 'package:aghaz/screens/MyHomePage.dart';
 import 'package:aghaz/screens/SignUpPage.dart';
-import 'package:aghaz/screens/VolunteerPost.dart';
+import 'package:aghaz/screens/volunter_post/VolunteerPost.dart';
 import 'package:aghaz/widgets/AgahzTextField.dart';
 import 'package:aghaz/widgets/AghazButton.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';

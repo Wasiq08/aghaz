@@ -1,7 +1,8 @@
 import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
-import 'package:aghaz/screens/VolunteerPost.dart';
+import 'package:aghaz/screens/tab_screen/Feed.dart';
+import 'package:aghaz/screens/volunter_post/VolunteerPost.dart';
 import 'package:aghaz/themes/app_theme.dart';
 import 'package:aghaz/widgets/AghazCard.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -14,8 +15,6 @@ class Choice {
   final String title;
 }
 
-List<PostList> postList = PostList.postList;
-
 const List<Choice> choices = const <Choice>[
   const Choice(title: 'FEED'),
   const Choice(title: 'PROJECT'),
@@ -24,16 +23,20 @@ const List<Choice> choices = const <Choice>[
 
 Widget _buildListView() {
   return Container(
-      color: AppTheme.buildLightTheme().backgroundColor,
-      child: ListView.builder(
-        itemCount: postList.length,
-        padding: const EdgeInsets.only(top: 10),
-        itemBuilder: (BuildContext context, int index) {
-          return PostListView(
-            postData: postList[index],
-          );
-        },
-      ));
+    color: AppTheme.buildLightTheme().backgroundColor,
+    child: Center(
+      child: Text("Posts"),
+    ),
+//    ListView.builder(
+//      itemCount: postList.length,
+//      padding: const EdgeInsets.only(top: 10),
+//      itemBuilder: (BuildContext context, int index) {
+//        return PostListView(
+//          postData: postList[index],
+//        );
+//      },
+//    ),
+  );
 }
 
 Widget _buildProjectListView() {
@@ -104,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            _buildListView(),
+            Feed(),
             _buildProjectListView(),
             _buildExploreListView()
           ],

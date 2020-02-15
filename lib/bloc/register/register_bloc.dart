@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:aghaz/bloc/register/register_state.dart';
+import 'package:aghaz/model/user.dart';
 import 'package:aghaz/services/UserRepository.dart';
 import 'package:aghaz/services/firebase_store/FirebaseStore.dart';
 import 'package:aghaz/validator/Validator.dart';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import './bloc.dart';
@@ -50,6 +52,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           gender: event.gender,
           address: event.address,
           dob: event.dob);
+    } else if (event is SendPost) {
+      String email = await _userRepository.getUser();
+      _store.sendPost(
+        title: event.title,
+        detail: event.detail,
+        email: email,
+        date: event.date,
+        imagePath: event.imageUrl,
+      );
     }
     if (event is EmailChanged) {
       yield* _mapEmailChangedToState(event.email);

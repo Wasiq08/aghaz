@@ -1,48 +1,34 @@
+import 'package:aghaz/model/user.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'post_list.g.dart';
+
+@JsonSerializable()
 class PostList {
-  String imagePath = '';
-  String description = '';
-  String location = '';
-  bool isFavourite;
-  String category;
-  String date;
+  final String imagePath;
+
+  final String description;
+
+  @JsonKey(nullable: true)
+  final String location;
+
+  @JsonKey(nullable: true)
+  final bool isFavourite;
+  final String category;
+  final String date;
+  final String email;
 
   PostList(
-      {this.imagePath = '',
-      this.description = '',
-      this.location = '',
-      this.category = 'Cleanliness',
-      this.date = '21 December 2019'});
+      {this.imagePath,
+      this.description,
+      this.location,
+      this.isFavourite,
+      this.category,
+      this.date,
+      this.email});
 
-  static List<PostList> postList = <PostList>[
-    PostList(
-        imagePath: 'assets/img.jpg',
-        description: 'Kachra Overloaded',
-        category: 'Cleanliness',
-        location: 'Gulshan-e-Iqbal Block 5 Near Moti Mahal',
-        date: '21 December 2019'),
-    PostList(
-        imagePath: 'assets/img.jpg',
-        description: 'Water Issue',
-        category: 'Water',
-        location: 'BufferZone Block 10 Near Sakhi Hasan',
-        date: '2 January 2020'),
-    PostList(
-        imagePath: 'assets/img.jpg',
-        description: 'No Trees in Area',
-        category: 'Tree',
-        location: 'Gulshan-e-Azeem Near Rim Jhim Tower',
-        date: '10 February 2029'),
-    PostList(
-        imagePath: 'assets/img.jpg',
-        description: 'No Trees in Area',
-        category: 'Tree',
-        location: 'Gulshan-e-Azeem Near Rim Jhim Tower',
-        date: '10 February 2029'),
-    PostList(
-        imagePath: 'assets/img.jpg',
-        description: 'No Trees in Area',
-        category: 'Tree',
-        location: 'Gulshan-e-Azeem Near Rim Jhim Tower',
-        date: '10 February 2029')
-  ];
+  factory PostList.fromJson(Map<String, dynamic> json) =>
+      _$PostListFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PostListToJson(this);
 }

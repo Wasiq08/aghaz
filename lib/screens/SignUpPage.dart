@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;

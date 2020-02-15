@@ -19,17 +19,11 @@ class PostListView extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(5.0),
         ),
-
-//        boxShadow: <BoxShadow>[
-//          BoxShadow(
-//            color: Colors.grey.withOpacity(0.6),
-//            offset: const Offset(1, 1),
-//            blurRadius: 0,
-//          ),
-//        ],
       ),
       child: Card(
+        margin: EdgeInsets.all(5),
         elevation: 0.5,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Wrap(
           spacing: 10,
           direction: Axis.vertical,
@@ -52,7 +46,7 @@ class PostListView extends StatelessWidget {
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      'Upload Time: 1:45 PM',
+                      postData.date,
                       style: Theme.of(context).textTheme.caption,
                     ),
                   ],
@@ -62,13 +56,13 @@ class PostListView extends StatelessWidget {
             Container(
               width: ScreenSize.blockSizeHorizontal * 100,
               height: ScreenSize.blockSizeVertical * 25,
-              child: Image.asset(
+              child: Image.network(
                 postData.imagePath,
                 fit: BoxFit.cover,
               ),
             ),
             Text(
-              postData.description,
+              postData.category,
               style: Theme.of(context).textTheme.subhead,
             ),
             Text(
@@ -77,87 +71,6 @@ class PostListView extends StatelessWidget {
             ),
           ],
         ),
-//        child: ClipRRect(
-//          borderRadius: const BorderRadius.all(
-//            Radius.circular(5.0),
-//          ),
-//          child: Stack(
-//            children: <Widget>[
-//              Column(
-//                children: <Widget>[
-//                  AspectRatio(
-//                    aspectRatio: 2,
-//                    child: Image.asset(
-//                      postData.imagePath,
-//                      fit: BoxFit.cover,
-//                    ),
-//                  ),
-//                  Container(
-//                    color: AppTheme.buildLightTheme().backgroundColor,
-//                    child: Row(
-//                      mainAxisAlignment: MainAxisAlignment.center,
-//                      crossAxisAlignment: CrossAxisAlignment.start,
-//                      children: <Widget>[
-//                        Expanded(
-//                          child: Container(
-//                            child: Padding(
-//                              padding: const EdgeInsets.only(
-//                                  left: 16, top: 8, bottom: 8),
-//                              child: Column(
-//                                mainAxisAlignment: MainAxisAlignment.center,
-//                                crossAxisAlignment: CrossAxisAlignment.start,
-//                                children: <Widget>[
-//                                  Text(
-//                                    postData.description,
-//                                    textAlign: TextAlign.left,
-//                                    style: Theme.of(context).textTheme.subhead
-//                                  ),
-//                                  Row(
-//                                    crossAxisAlignment:
-//                                        CrossAxisAlignment.center,
-//                                    mainAxisAlignment: MainAxisAlignment.start,
-//                                    children: <Widget>[
-//                                      Text(
-//                                        postData.description,
-//                                        style: Theme.of(context).textTheme.subtitle,
-//                                      ),
-//                                      const SizedBox(
-//                                        width: 4,
-//                                      ),
-//                                      Icon(Icons.map,
-//                                          size: 12, color: Colors.red),
-//                                    ],
-//                                  ),
-//                                ],
-//                              ),
-//                            ),
-//                          ),
-//                        ),
-//                      ],
-//                    ),
-//                  ),
-//                ],
-//              ),
-//              Positioned(
-//                top: 8,
-//                right: 8,
-//                child: Material(
-//                  color: Colors.transparent,
-//                  child: InkWell(
-//                    borderRadius: const BorderRadius.all(
-//                      Radius.circular(32.0),
-//                    ),
-//                    onTap: () {},
-//                    child: Padding(
-//                      padding: const EdgeInsets.all(8.0),
-//                      child: Icon(EvaIcons.heartOutline, color: Colors.green),
-//                    ),
-//                  ),
-//                ),
-//              )
-//            ],
-//          ),
-//        ),
       ),
     );
   }

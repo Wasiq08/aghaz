@@ -67,3 +67,13 @@ class SendData extends RegisterEvent {
       this.gender,
       this.dob});
 }
+
+class SendPost extends RegisterEvent{
+final String title;
+final String detail;
+final String imageUrl;
+final String date;
+
+SendPost(this.title, this.detail, this.imageUrl, this.date);
+
+}
