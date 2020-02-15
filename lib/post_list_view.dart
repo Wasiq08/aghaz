@@ -1,5 +1,6 @@
 import 'package:aghaz/helper/ScreenSize.dart';
 import 'package:aghaz/model/post_list.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PostListView extends StatelessWidget {
@@ -42,7 +43,7 @@ class PostListView extends StatelessWidget {
                   direction: Axis.vertical,
                   children: <Widget>[
                     Text(
-                      'By: Ahmed Ali Khan',
+                      'By: ' + postData.email,
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
@@ -55,10 +56,27 @@ class PostListView extends StatelessWidget {
             ),
             Container(
               width: ScreenSize.blockSizeHorizontal * 100,
-              height: ScreenSize.blockSizeVertical * 25,
-              child: Image.network(
-                postData.imagePath,
-                fit: BoxFit.cover,
+              //height: ScreenSize.blockSizeVertical * 25,
+              child: CachedNetworkImage(
+                imageUrl: postData.imagePath,
+                placeholder: (context, url) {
+                  return Container(
+                    width: ScreenSize.blockSizeHorizontal * 100,
+                    height: ScreenSize.blockSizeVertical * 30,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
+                imageBuilder: (context, image) {
+                  return Container(
+                    width: ScreenSize.blockSizeHorizontal * 100,
+                    height: ScreenSize.blockSizeVertical * 30,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: image, fit: BoxFit.fill),
+                    ),
+                  );
+                },
               ),
             ),
             Text(

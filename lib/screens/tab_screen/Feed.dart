@@ -10,7 +10,8 @@ class Feed extends StatelessWidget {
   Widget build(BuildContext context) {
     PostList list;
     return StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('Post').snapshots(),
+        stream:
+            Firestore.instance.collection('Post').orderBy('date',descending: true).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(

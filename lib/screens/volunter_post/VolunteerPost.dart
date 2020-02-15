@@ -129,6 +129,9 @@ class _VolunteerPostState extends State<VolunteerPost> {
                       if (_image == null ||
                           controllerProblem.text.isEmpty ||
                           controllerDetail.text.isEmpty) {
+                        globalKey.currentState.showSnackBar(SnackBar(
+                          content: Text("Error enter required fields"),
+                        ));
                       } else {
                         globalKey.currentState.showSnackBar(SnackBar(
                           content: Text("Please wait"),

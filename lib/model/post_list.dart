@@ -1,4 +1,3 @@
-import 'package:aghaz/model/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'post_list.g.dart';

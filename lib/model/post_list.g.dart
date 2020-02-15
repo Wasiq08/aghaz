@@ -14,6 +14,7 @@ PostList _$PostListFromJson(Map<String, dynamic> json) {
     isFavourite: json['isFavourite'] as bool,
     category: json['category'] as String,
     date: json['date'] as String,
+    email: json['email'] as String,
   );
 }
 
@@ -24,4 +25,5 @@ Map<String, dynamic> _$PostListToJson(PostList instance) => <String, dynamic>{
       'isFavourite': instance.isFavourite,
       'category': instance.category,
       'date': instance.date,
+      'email': instance.email,
     };
