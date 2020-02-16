@@ -3,6 +3,7 @@ import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
 import 'package:aghaz/explore.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
+import 'package:aghaz/screens/MyRewards.dart';
 import 'package:aghaz/screens/ProjectPage.dart';
 import 'package:aghaz/themes/app_theme.dart';
 import 'package:aghaz/widgets/AghazCard.dart';
@@ -40,7 +41,7 @@ Widget _buildListView() {
 
 Widget _buildProjectListView() {
   return Container(
-    child: ProjectPage(),
+    child: MyRewards(),
   );
 }
 

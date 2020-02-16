@@ -1,3 +1,4 @@
+import 'package:aghaz/screens/ArticleDetail.dart';
 import 'package:flutter/material.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -83,11 +84,10 @@ class _ExplorePageState extends State<ExplorePage> {
                   padding: EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {},
-                        ),
-                      );
+                     Navigator.push(context, MaterialPageRoute(
+                       builder: (context)=> ArticleDetails()
+                     ));
+                     
                     },
                     child: Container(
                       height: 250,
