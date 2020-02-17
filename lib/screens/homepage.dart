@@ -1,6 +1,9 @@
 import 'package:aghaz/bloc/authentication_bloc/bloc.dart';
+import 'package:aghaz/explore.dart';
 import 'package:aghaz/model/post_list.dart';
 import 'package:aghaz/post_list_view.dart';
+import 'package:aghaz/screens/MyRewards.dart';
+import 'package:aghaz/screens/ProjectPage.dart';
 import 'package:aghaz/screens/tab_screen/Feed.dart';
 import 'package:aghaz/screens/volunter_post/VolunteerPost.dart';
 import 'package:aghaz/themes/app_theme.dart';
@@ -17,7 +20,7 @@ class Choice {
 
 const List<Choice> choices = const <Choice>[
   const Choice(title: 'FEED'),
-  const Choice(title: 'PROJECT'),
+  const Choice(title: 'SOCIAL GOALS'),
   const Choice(title: 'EXPLORE')
 ];
 
@@ -41,22 +44,12 @@ Widget _buildListView() {
 
 Widget _buildProjectListView() {
   return Container(
-    child: Text('Project'),
+    child: MyRewards(),
   );
 }
 
 Widget _buildExploreListView() {
-  return Container(
-    child: AghazCard(
-      title: 'Wasiq',
-      color: Colors.red,
-      detail: 'adadad',
-      imageUrl: 'assets/images/img1.jpeg',
-      name: 'Wasiq',
-      date: '12/09/2019',
-      additionalDetail: 'asdada',
-    ),
-  );
+  return ExplorePage();
 }
 
 class HomePage extends StatefulWidget {
