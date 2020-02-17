@@ -4,8 +4,8 @@ part 'post_list.g.dart';
 
 @JsonSerializable()
 class PostList {
+  final String problem;
   final String imagePath;
-
   final String description;
 
   @JsonKey(nullable: true)
@@ -18,7 +18,8 @@ class PostList {
   final String email;
 
   PostList(
-      {this.imagePath,
+      {this.problem,
+      this.imagePath,
       this.description,
       this.location,
       this.isFavourite,

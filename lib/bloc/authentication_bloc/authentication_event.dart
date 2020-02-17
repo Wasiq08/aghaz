@@ -16,3 +16,5 @@ class LoggedIn extends AuthenticationEvent {}
 
 //When the user logout
 class LoggedOut extends AuthenticationEvent {}
+
+class ErrorEvent extends AuthenticationEvent{}

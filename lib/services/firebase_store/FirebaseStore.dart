@@ -33,13 +33,17 @@ class FirebaseStore {
       String title,
       String detail,
       String email,
-      String date}) {
+      String date,
+      String problem,
+      String location}) {
     PostList postList = PostList(
         imagePath: imagePath,
         category: title,
         description: detail,
         email: email,
-        date: date);
+        date: date,
+        location: location,
+        problem: problem);
     Firestore.instance.collection('Post').document().setData(
           jsonDecode(
             jsonEncode(postList),

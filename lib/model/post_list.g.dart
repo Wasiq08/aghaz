@@ -8,6 +8,7 @@ part of 'post_list.dart';
 
 PostList _$PostListFromJson(Map<String, dynamic> json) {
   return PostList(
+    problem: json['problem'] as String,
     imagePath: json['imagePath'] as String,
     description: json['description'] as String,
     location: json['location'] as String,
@@ -19,6 +20,7 @@ PostList _$PostListFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PostListToJson(PostList instance) => <String, dynamic>{
+      'problem': instance.problem,
       'imagePath': instance.imagePath,
       'description': instance.description,
       'location': instance.location,

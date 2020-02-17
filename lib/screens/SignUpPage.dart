@@ -3,16 +3,14 @@ import 'package:aghaz/bloc/register/register_bloc.dart';
 import 'package:aghaz/bloc/register/register_event.dart';
 import 'package:aghaz/bloc/register/register_state.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
-import 'package:aghaz/model/user.dart';
 import 'package:aghaz/screens/HomeLogin.dart';
 import 'package:aghaz/services/UserRepository.dart';
 import 'package:aghaz/services/firebase_store/FirebaseStore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;
@@ -76,12 +74,16 @@ class _SignUpPageState extends State<SignUpPage> {
     return state.isFormValid && isPopulated && !state.isSubmitting;
   }
 
+  //Radio button value
+  String radioValue = "Male";
+
   @override
   void initState() {
     super.initState();
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
+    _genderController.text = radioValue;
   }
 
   @override
@@ -131,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 password: _passwordController.text,
                 address: _addressController.text,
                 dob: _dobController.text,
-            gender: _genderController.text),
+                gender: _genderController.text),
           );
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
           Navigator.push(
@@ -162,7 +164,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Container(
                           width: ScreenSize.blockSizeHorizontal * 50,
                           height: ScreenSize.blockSizeVertical * 20,
-                          color: Colors.red,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/images/logo.png'),
+                                fit: BoxFit.contain),
+                          ),
                         ),
                       ),
                       Container(
@@ -174,18 +180,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           inputFormatters: [DateInputFormatter()],
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
                             labelText: 'Date of birth',
                             labelStyle: Theme.of(context).textTheme.body1,
                             hintText: "Enter Date of birth",
@@ -194,32 +188,54 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       Container(
-                        width: ScreenSize.blockSizeHorizontal * 85,
-                        height: ScreenSize.blockSizeVertical * 15,
-                        child: TextFormField(
-                          autovalidate: true,
-                          controller: _genderController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
+                          width: ScreenSize.blockSizeHorizontal * 85,
+                          height: ScreenSize.blockSizeVertical * 15,
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  _genderController.text,
+                                  style: Theme.of(context).textTheme.subtitle,
+                                ),
+                                Wrap(
+                                  direction: Axis.horizontal,
+                                  spacing: 10,
+                                  children: <Widget>[
+                                    Radio(
+                                        value: 'Male',
+                                        groupValue: radioValue,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _genderController.text = value;
+                                            radioValue = value;
+                                          });
+                                        }),
+                                    Radio(
+                                      value: 'Female',
+                                      groupValue: radioValue,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _genderController.text = value;
+                                          radioValue = value;
+                                        });
+                                      },
+                                    ),
+                                    Radio(
+                                        value: 'Other',
+                                        groupValue: radioValue,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _genderController.text = value;
+                                            radioValue = value;
+                                          });
+                                        })
+                                  ],
+                                ),
+                              ],
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            labelText: 'Gender',
-                            labelStyle: Theme.of(context).textTheme.body1,
-                            hintText: "Enter Gender",
-                            hintStyle: Theme.of(context).textTheme.body1,
-                          ),
-                        ),
-                      ),
+                          )),
                       Container(
                         width: ScreenSize.blockSizeHorizontal * 85,
                         height: ScreenSize.blockSizeVertical * 15,
@@ -228,19 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: _addressController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            labelText: 'address',
+                            labelText: 'Address',
                             labelStyle: Theme.of(context).textTheme.body1,
                             hintText: "Enter Address",
                             hintStyle: Theme.of(context).textTheme.body1,
@@ -255,18 +259,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: _nameController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
                             labelText: 'Name',
                             labelStyle: Theme.of(context).textTheme.body1,
                             hintText: "Enter name",
@@ -285,18 +277,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             return !state.isEmailValid ? 'Invalid Email' : null;
                           },
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
                             prefixIcon: Icon(EvaIcons.emailOutline),
                             labelText: 'Email',
                             labelStyle: Theme.of(context).textTheme.body1,
@@ -319,18 +299,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 : null;
                           },
                           decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 0),
-                            ),
                             prefixIcon: Icon(EvaIcons.lockOutline),
                             labelText: 'Password',
                             labelStyle: Theme.of(context).textTheme.body1,

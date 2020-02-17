@@ -2,14 +2,22 @@ import 'dart:io';
 
 import 'package:aghaz/bloc/image_bloc/image_bloc.dart';
 import 'package:aghaz/bloc/image_bloc/image_event.dart';
+import 'package:aghaz/bloc/image_bloc/image_state.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
 import 'package:aghaz/services/firebase_storage/StorageFirebase.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
 class VolunteerPost extends StatefulWidget {
+  final String problem;
+
+  VolunteerPost({@required this.problem});
+
   @override
   _VolunteerPostState createState() => _VolunteerPostState();
 }
@@ -20,6 +28,7 @@ class _VolunteerPostState extends State<VolunteerPost> {
   ImageBloc imageBloc;
   TextEditingController controllerProblem;
   TextEditingController controllerDetail;
+  TextEditingController locationController;
   final globalKey = GlobalKey<ScaffoldState>();
 
   Future getImage() async {
@@ -35,6 +44,8 @@ class _VolunteerPostState extends State<VolunteerPost> {
     storageFirebase = StorageFirebase();
     controllerProblem = TextEditingController();
     controllerDetail = TextEditingController();
+    locationController = TextEditingController();
+    locationController.text = "Karachi, Sindh, Pakistan";
     imageBloc = ImageBloc(storageFirebase: storageFirebase);
     super.initState();
   }
@@ -110,7 +121,7 @@ class _VolunteerPostState extends State<VolunteerPost> {
               FormBuilder(
                 child: FormBuilderTextField(
                   controller: controllerDetail,
-                  maxLength: 60,
+                  maxLength: 200,
                   keyboardType: TextInputType.text,
                   attribute: "Detail",
                   decoration: InputDecoration(labelText: "Detail"),
@@ -120,6 +131,37 @@ class _VolunteerPostState extends State<VolunteerPost> {
                   ],
                 ),
               ),
+              FutureBuilder<String>(
+                  future: getLocation(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      locationController.text = snapshot.data;
+                      return TextField(
+                        onTap: () {},
+                        controller: locationController,
+                        decoration: InputDecoration(
+                          labelText: 'Location',
+                          labelStyle: Theme.of(context).textTheme.subtitle,
+                          suffixIcon: Icon(
+                            EvaIcons.pin,
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                      );
+                    }
+                    return TextFormField(
+                      onTap: () {},
+                      controller: locationController,
+                      decoration: InputDecoration(
+                        labelText: 'Enter Location',
+                        labelStyle: Theme.of(context).textTheme.subtitle,
+                        suffixIcon: Icon(
+                          EvaIcons.pin,
+                          color: Theme.of(context).accentColor,
+                        ),
+                      ),
+                    );
+                  }),
               Padding(
                 padding: const EdgeInsets.only(left: 60, right: 60, top: 16),
                 child: Center(
@@ -138,6 +180,8 @@ class _VolunteerPostState extends State<VolunteerPost> {
                         ));
                         imageBloc.add(
                           UploadImage(
+                              location: locationController.text,
+                              problem: widget.problem,
                               image: _image,
                               context: context,
                               title: controllerProblem.text,
@@ -146,11 +190,11 @@ class _VolunteerPostState extends State<VolunteerPost> {
                       }
                     },
                     icon: Icon(
-                      EvaIcons.arrowForward,
+                      EvaIcons.cloudUpload,
                       color: Colors.white,
                     ),
                     label: Text(
-                      'Next',
+                      'Upload',
                       style: Theme.of(context)
                           .textTheme
                           .subhead
@@ -158,11 +202,39 @@ class _VolunteerPostState extends State<VolunteerPost> {
                     ),
                   ),
                 ),
+              ),
+              BlocBuilder(
+                bloc: imageBloc,
+                builder: (context, state) {
+                  if (state is ErrorImageState) {
+                    return Container(
+                      child: Icon(EvaIcons.email),
+                    );
+                  }
+                  return Container();
+                },
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<String> getLocation() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+//    List<Placemark> placemark = await Geolocator()
+//        .placemarkFromCoordinates(position.latitude, position.longitude);
+//    print(position.longitude);
+    final coordinates = new Coordinates(position.latitude, position.longitude);
+    List<Address> address =
+        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+
+    var addresses = address.first;
+    print(addresses.addressLine);
+
+    return addresses.addressLine;
   }
 }

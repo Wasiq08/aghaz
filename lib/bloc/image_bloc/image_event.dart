@@ -11,10 +11,16 @@ class UploadImage extends ImageEvent {
   final BuildContext context;
   final String title;
   final String detail;
+  final String problem;
+  final String location;
+  final String email;
 
   UploadImage(
       {@required this.image,
       @required this.context,
       @required this.title,
-      @required this.detail});
+      @required this.detail,
+      @required this.problem,
+      @required this.location,
+      this.email});
 }

@@ -158,7 +158,12 @@ class _UserLoginState extends State<UserLogin> {
                         Container(
                           width: ScreenSize.blockSizeHorizontal * 50,
                           height: ScreenSize.blockSizeVertical * 20,
-                          color: Colors.red,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/logo.png'),
+                              fit: BoxFit.contain
+                            ),
+                          ),
                         ),
                         Container(
                           width: ScreenSize.blockSizeHorizontal * 85,
@@ -173,18 +178,18 @@ class _UserLoginState extends State<UserLogin> {
                                   : null;
                             },
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    width: 0),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    width: 0),
-                              ),
+//                              border: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                    color: Theme.of(context)
+//                                        .scaffoldBackgroundColor,
+//                                    width: 0),
+//                              ),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                    color: Theme.of(context)
+//                                        .scaffoldBackgroundColor,
+//                                    width: 0),
+//                              ),
                               prefixIcon: Icon(EvaIcons.emailOutline),
                               labelText: 'Email',
                               labelStyle: Theme.of(context).textTheme.body1,
@@ -207,18 +212,18 @@ class _UserLoginState extends State<UserLogin> {
                                   : null;
                             },
                             decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    width: 0),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    width: 0),
-                              ),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                    color: Theme.of(context)
+//                                        .scaffoldBackgroundColor,
+//                                    width: 0),
+//                              ),
+//                              border: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                    color: Theme.of(context)
+//                                        .scaffoldBackgroundColor,
+//                                    width: 0),
+//                              ),
                               prefixIcon: Icon(EvaIcons.lockOutline),
                               labelText: 'Password',
                               labelStyle: Theme.of(context).textTheme.body1,
@@ -254,12 +259,21 @@ class _UserLoginState extends State<UserLogin> {
                               ),
                             );
                           },
-                          child: Text(
-                            "Donot have an account",
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption
-                                .copyWith(color: Theme.of(context).accentColor),
+                          child: Container(
+                            height: ScreenSize.blockSizeVertical*6,
+                            //color: Colors.grey,
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Donot have an account",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption
+                                      .copyWith(color: Theme.of(context).accentColor),
+                                ),
+                              ),
+                            ),
                           ),
                         )
                       ],

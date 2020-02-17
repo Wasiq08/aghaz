@@ -43,7 +43,7 @@ class AuthenticationBloc
         yield Unauthenticated();
       }
     } catch (_) {
-      yield Unauthenticated();
+      yield ErrorState();
     }
   }
 

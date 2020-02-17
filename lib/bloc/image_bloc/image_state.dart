@@ -4,3 +4,6 @@ import 'package:meta/meta.dart';
 abstract class ImageState {}
 
 class InitialImageState extends ImageState {}
+
+
+class ErrorImageState extends ImageState{}

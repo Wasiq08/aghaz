@@ -59,18 +59,18 @@ class AghazTextField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: lable,
             hintText: hint,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
+//            border: OutlineInputBorder(
+//              borderSide: BorderSide(color: Colors.grey[300], width: 1),
+//              borderRadius: BorderRadius.all(
+//                Radius.circular(5),
+//              ),
+//            ),
+//            enabledBorder: OutlineInputBorder(
+//              borderSide: BorderSide(color: Colors.white, width: 0),
+//              borderRadius: BorderRadius.all(
+//                Radius.circular(5),
+//              ),
+//            ),
           ),
         ),
       ),
@@ -168,18 +168,18 @@ class AghazTextField extends StatelessWidget {
             labelText: lable,
             hintText: hint,
             prefixIcon: Icon(icon),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
+//            border: OutlineInputBorder(
+//              borderSide: BorderSide(color: Colors.white, width: 0),
+//              borderRadius: BorderRadius.all(
+//                Radius.circular(5),
+//              ),
+//            ),
+//            enabledBorder: OutlineInputBorder(
+//              borderSide: BorderSide(color: Colors.white, width: 0),
+//              borderRadius: BorderRadius.all(
+//                Radius.circular(5),
+//              ),
+//            ),
           ),
         ),
       ),

@@ -11,3 +11,5 @@ class UploadPost extends PostEvent {
   UploadPost(
       {@required this.title, @required this.detail, @required this.imageUrl});
 }
+
+

@@ -4,3 +4,5 @@ import 'package:meta/meta.dart';
 abstract class PostState {}
 
 class InitialPostState extends PostState {}
+
+class ErrorPostState extends PostState{}

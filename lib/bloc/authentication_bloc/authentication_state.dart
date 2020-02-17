@@ -1,13 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 abstract class AuthenticationState extends Equatable {
+  @override
+  List<Object> get props => null;
+
   const AuthenticationState();
 }
 
 //UnInitialized state when the app started
 class Uninitialized extends AuthenticationState {
   @override
-
   List<Object> get props => null;
 }
 
@@ -25,8 +27,6 @@ class Authenticated extends AuthenticationState {
 }
 
 //When the sign out
-class Unauthenticated extends AuthenticationState {
-  @override
+class Unauthenticated extends AuthenticationState {}
 
-  List<Object> get props => null;
-}
+class ErrorState extends AuthenticationState {}

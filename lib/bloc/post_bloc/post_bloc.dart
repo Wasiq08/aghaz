@@ -20,13 +20,17 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   Stream<PostState> mapEventToState(PostEvent event) async* {
     if (event is UploadPost) {
       String email = await userRepository.getUser();
-      print(email);
-      store.sendPost(
-          imagePath: event.imageUrl,
-          title: event.title,
-          detail: event.detail,
-          date: df.format(DateTime.now()),
-          email: email);
+
+      try {
+        store.sendPost(
+            imagePath: event.imageUrl,
+            title: event.title,
+            detail: event.detail,
+            date: df.format(DateTime.now()),
+            email: email);
+      } catch (_) {
+        yield ErrorPostState();
+      }
     }
   }
 }
