@@ -14,7 +14,7 @@ class VolunteerPicture extends StatelessWidget {
       child: Center(
         child: Container(
           width: ScreenSize.blockSizeHorizontal * 80,
-          height: ScreenSize.blockSizeVertical * 20,
+          height: ScreenSize.blockSizeVertical * 100,
           child: Center(
             child: Column(
               children: <Widget>[
@@ -23,6 +23,12 @@ class VolunteerPicture extends StatelessWidget {
                     lable: 'Next',
                     onPress: () {
                       controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.ease);
+                    },
+                    color: Theme.of(context).accentColor),
+                    AghazButton(
+                    lable: 'back',
+                    onPress: () {
+                      controller.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.ease);
                     },
                     color: Theme.of(context).accentColor)
               ],

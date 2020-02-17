@@ -10,13 +10,12 @@ class RegisterState {
 
   bool get isFormValid => isEmailValid && isPasswordValid;
 
-  RegisterState({
-    @required this.isEmailValid,
-    @required this.isPasswordValid,
-    @required this.isSubmitting,
-    @required this.isSuccess,
-    @required this.isFailure,
-  });
+  RegisterState(
+      {@required this.isEmailValid,
+      @required this.isPasswordValid,
+      @required this.isSubmitting,
+      @required this.isSuccess,
+      @required this.isFailure});
 
   factory RegisterState.empty() {
     return RegisterState(

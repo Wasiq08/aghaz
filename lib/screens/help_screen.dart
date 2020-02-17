@@ -1,4 +1,4 @@
-
+import 'package:aghaz/onboarding.dart';
 import 'package:aghaz/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +20,11 @@ class _HelpScreenState extends State<HelpScreen> {
       child: SafeArea(
         top: false,
         child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Help'),
+            centerTitle: true,
+          ),
           backgroundColor: AppTheme.nearlyWhite,
           body: Column(
             children: <Widget>[

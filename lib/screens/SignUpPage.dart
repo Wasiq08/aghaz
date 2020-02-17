@@ -3,17 +3,20 @@ import 'package:aghaz/bloc/register/register_bloc.dart';
 import 'package:aghaz/bloc/register/register_event.dart';
 import 'package:aghaz/bloc/register/register_state.dart';
 import 'package:aghaz/helper/ScreenSize.dart';
+import 'package:aghaz/model/user.dart';
 import 'package:aghaz/screens/HomeLogin.dart';
-import 'package:aghaz/screens/SignInPage.dart';
 import 'package:aghaz/services/UserRepository.dart';
-import 'package:aghaz/widgets/AgahzTextField.dart';
-import 'package:aghaz/widgets/AghazButton.dart';
+import 'package:aghaz/services/firebase_store/FirebaseStore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;
+  final FirebaseStore store = FirebaseStore();
 
   RegisterScreen({Key key, @required UserRepository userRepository})
       : assert(userRepository != null),
@@ -26,14 +29,17 @@ class RegisterScreen extends StatelessWidget {
         body: MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RegisterBloc(userRepository: _userRepository),
+          create: (context) =>
+              RegisterBloc(userRepository: _userRepository, store: store),
         ),
         BlocProvider(
           create: (context) =>
               AuthenticationBloc(userRepository: _userRepository),
         ),
       ],
-      child: SignUpPage(),
+      child: SignUpPage(
+        userRepository: _userRepository,
+      ),
     )
 
 //      BlocProvider<RegisterBloc>(
@@ -45,6 +51,10 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class SignUpPage extends StatefulWidget {
+  final UserRepository userRepository;
+
+  SignUpPage({@required this.userRepository});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -52,6 +62,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   RegisterBloc _registerBloc;
 
@@ -110,6 +124,15 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           );
         } else if (state.isSuccess) {
+          BlocProvider.of<RegisterBloc>(context).add(
+            SendData(
+                name: _nameController.text,
+                email: _emailController.text,
+                password: _passwordController.text,
+                address: _addressController.text,
+                dob: _dobController.text,
+            gender: _genderController.text),
+          );
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
           Navigator.push(
             context,
@@ -128,16 +151,128 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: ScreenSize.blockSizeHorizontal * 100,
                 height: ScreenSize.blockSizeVertical * 100,
                 child: Center(
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    runAlignment: WrapAlignment.center,
-                    spacing: 10,
+                  child: ListView(
+                    padding: EdgeInsets.all(20),
+//                    direction: Axis.vertical,
+//                    crossAxisAlignment: WrapCrossAlignment.center,
+//                    runAlignment: WrapAlignment.center,
+//                    spacing: 10,
                     children: <Widget>[
+                      Center(
+                        child: Container(
+                          width: ScreenSize.blockSizeHorizontal * 50,
+                          height: ScreenSize.blockSizeVertical * 20,
+                          color: Colors.red,
+                        ),
+                      ),
                       Container(
-                        width: ScreenSize.blockSizeHorizontal * 50,
-                        height: ScreenSize.blockSizeVertical * 20,
-                        color: Colors.red,
+                        width: ScreenSize.blockSizeHorizontal * 85,
+                        height: ScreenSize.blockSizeVertical * 15,
+                        child: TextFormField(
+                          autovalidate: true,
+                          controller: _dobController,
+                          inputFormatters: [DateInputFormatter()],
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            labelText: 'Date of birth',
+                            labelStyle: Theme.of(context).textTheme.body1,
+                            hintText: "Enter Date of birth",
+                            hintStyle: Theme.of(context).textTheme.body1,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: ScreenSize.blockSizeHorizontal * 85,
+                        height: ScreenSize.blockSizeVertical * 15,
+                        child: TextFormField(
+                          autovalidate: true,
+                          controller: _genderController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            labelText: 'Gender',
+                            labelStyle: Theme.of(context).textTheme.body1,
+                            hintText: "Enter Gender",
+                            hintStyle: Theme.of(context).textTheme.body1,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: ScreenSize.blockSizeHorizontal * 85,
+                        height: ScreenSize.blockSizeVertical * 15,
+                        child: TextFormField(
+                          autovalidate: true,
+                          controller: _addressController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            labelText: 'address',
+                            labelStyle: Theme.of(context).textTheme.body1,
+                            hintText: "Enter Address",
+                            hintStyle: Theme.of(context).textTheme.body1,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: ScreenSize.blockSizeHorizontal * 85,
+                        height: ScreenSize.blockSizeVertical * 15,
+                        child: TextFormField(
+                          autovalidate: true,
+                          controller: _nameController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  width: 0),
+                            ),
+                            labelText: 'Name',
+                            labelStyle: Theme.of(context).textTheme.body1,
+                            hintText: "Enter name",
+                            hintStyle: Theme.of(context).textTheme.body1,
+                          ),
+                        ),
                       ),
                       Container(
                         width: ScreenSize.blockSizeHorizontal * 85,
